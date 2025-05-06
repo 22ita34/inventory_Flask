@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}Add Product Movement{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Product Movement</h1>
+    <a href="/product" class="add-btn">📦 View All Products</a>
+
+    <form method="POST" action="/add_movement" class="movement-form">
+        <label>Product:</label>
+        <select name="product_id" required>
+            {% for product in products %}
+                <option value="{{ product[0] }}">{{ product[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Movement Type:</label>
+        <select name="movement_type" required>
+            <option value="IN">Purchase</option>
+            <option value="OUT">Sale</option>
+            <option value="TRANSFER">Transfer</option>
+        </select>
+
+        <label>Quantity:</label>
+        <input type="number" name="quantity" required min="1">
+
+        <label>From Location (optional):</label>
+        <select name="from_location" required>
+            {% for location in locations %}
+                <option value="{{ location[0] }}">{{ location[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <label>To Location (optional):</label>
+        <select name="to_location" required>
+            {% for location in locations %}
+                <option value="{{ location[0] }}">{{ location[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Remarks:</label>
+        <input type="text" name="remarks">
+
+        <button type="submit" class="add-btn">✅ Submit Movement</button>
+    </form>
+
+    <h2>Movement History</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product ID</th>
+                <th>Type</th>
+                <th>Qty</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Date</th>
+                <th>Remarks</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in history %}
+            <tr>
+                <td>{{ row.movement_id }}</td>
+                <td>{{ row.product_id }}</td>
+                <td>{{ row.movement_type }}</td>
+                <td>{{ row.quantity }}</td>
+                <td>{{ row.from_location or '-' }}</td>
+                <td>{{ row.to_location or '-' }}</td>
+                <td>{{ row.movement_date.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>{{ row.remarks }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="/" class="add-btn">← Back to Home</a>
+</div>
+
+<style>
+    .container {
+        background-color: #fff;
+        padding: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        width: 90%;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    h1 {
+        color: #2c3e50;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    h2 {
+        color: #2c3e50;
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    .movement-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 30px;
+    }
+
+    .movement-form label {
+        font-weight: bold;
+        margin-bottom: 4px;
+    }
+
+    .movement-form input,
+    .movement-form select {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .add-btn {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #3498db;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .add-btn:hover {
+        background-color: #2980b9;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    a.add-btn:last-of-type {
+        margin-top: 30px;
+        display: block;
+        text-align: center;
+    }
+</style>
+{% endblock %}

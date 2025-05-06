@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Location{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Edit Location</h1>
+
+    <form method="POST" action="/edit-location/{{ location.location_id }}">
+        <div class="form-group">
+            <label for="location_name">Location Name:</label><br>
+            <input type="text" id="location_name" name="location_name" value="{{ location.location_name }}" pattern="[A-Za-z\s]+" title="only letters and spaces allowed" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Address:</label><br>
+            <input type="text" id="address" name="address" value="{{ location.address }}" required>
+        </div>
+        <div class="form-group">
+            <label for="city">City:</label><br>
+            <input type="text" id="city" name="city" value="{{ location.city }}" pattern="[A-Za-z\s]+" title="only letters and spaces allowed" required>
+        </div>
+        <div class="form-group">
+            <label for="state">State:</label><br>
+            <input type="text" id="state" name="state" value="{{ location.state }}" pattern="[A-Za-z\s]+" title="only letters and spaces allowed" required>
+        </div>
+        <div class="form-group">
+            <label for="country">Country:</label><br>
+            <input type="text" id="country" name="country" value="{{ location.country }}" pattern="[A-Za-z\s]+" title="only letters and spaces allowed" required>
+        </div>
+        <div class="form-group">
+            <label for="postal_code">Postal Code:</label><br>
+            <input type="number" id="postal_code" name="postal_code" value="{{ location.postal_code }}" pattern="\d+" title="only digits allowed" required>
+        </div>
+        <button type="submit" class="submit-btn">Save Changes</button>
+    </form>
+
+    <br>
+    <a href="/location" class="back-link">← Back to Locations</a>
+</div>
+
+<style>
+    .container {
+        background-color: #fff;
+        padding: 30px;
+        margin-top: 50px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    h1 {
+        color: #2c3e50;
+        margin-bottom: 25px;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+    }
+
+    .submit-btn {
+        padding: 12px 25px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 100%;
+    }
+
+    .submit-btn:hover {
+        background-color: #2980b9;
+    }
+
+    a.back-link {
+        text-decoration: none;
+        color: #3498db;
+        font-weight: bold;
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    a.back-link:hover {
+        color: #2980b9;
+    }
+</style>
+{% endblock %}
