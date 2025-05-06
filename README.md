@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/1f8868f1-37ba-4df8-b2af-8a9fd0217149
+
 ![Screenshot 2025-05-06 112513](https://github.com/user-attachments/assets/4512274e-ead2-4c66-af15-7a17ac6b838a)
 # 📦 Inventory Management System
 
